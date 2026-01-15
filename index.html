@@ -30,11 +30,9 @@
 <body class="bg-gray-50 min-h-screen">
 
     <!-- Navbar at the top (positioned to the right of sidebar) -->
-    <nav class="bg-white border-b border-gray-200 fixed top-0 left-64 right-0 z-50 px-6 py-4 h-16 flex items-center justify-between">
+    <nav class="bg-white border-b border-gray-200 fixed top-0 left-56 right-0 z-50 px-6 py-4 h-16 flex items-center justify-between transition-all duration-300 ease-in-out">
       <div class="flex items-center">
-        <a class="text-xl font-bold text-gray-800 no-underline" href="#">
-          expertise.ai
-        </a>
+        <h1 id="page-title" class="text-xl font-bold text-gray-800">Dashboard</h1>
       </div>
       <div class="flex items-center space-x-4">
         <div class="hidden md:flex items-center bg-gray-100 rounded-full px-4 py-2">
@@ -56,15 +54,24 @@
 
     <!-- Sidebar occupying left side -->
     <aside id="multilevel-with-separator"
-           class="fixed left-0 top-0 h-screen w-64 bg-white border-r border-gray-200 shadow-lg">
+           class="fixed left-0 top-0 h-screen w-56 bg-white border-r border-gray-200 shadow-lg transition-all duration-300 ease-in-out">
         <div class="h-full overflow-y-auto px-2 pt-4">
+            <!-- Logo and fold button -->
+            <div class="flex items-center justify-between mb-4 px-2">
+                <a class="text-xl font-bold text-gray-800 no-underline" href="#">
+                    expertise.ai
+                </a>
+                <button id="sidebar-toggle" class="btn btn-sm btn-text p-1 rounded-full hover:bg-gray-100">
+                    <iconify-icon id="toggle-icon" icon="tabler:chevron-left" width="16" height="16"></iconify-icon>
+                </button>
+            </div>
             <ul class="menu space-y-0.5 p-0">
                 <!-- Main Menu Separator -->
-                <div class="divider text-base-content/50 py-2 after:border-0 font-semibold">Main Menu</div>
+                <div class="divider text-gray-500 py-1 after:border-0 text-xs font-medium uppercase tracking-wider">Main Menu</div>
 
                 <!-- Dashboard -->
                 <li>
-                    <a href="/dashboard" class="flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-gray-100 transition-colors nav-link" data-route="dashboard">
+                    <a href="/dashboard" class="flex items-center justify-start gap-3 px-3 py-2 rounded-lg hover:bg-gray-100 transition-colors nav-link" data-route="dashboard">
                         <iconify-icon icon="tabler:layout-dashboard" width="20" height="20"></iconify-icon>
                         <span>Dashboard</span>
                     </a>
@@ -72,7 +79,7 @@
 
                 <!-- Project -->
                 <li>
-                    <a href="/project" class="flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-gray-100 transition-colors nav-link" data-route="project">
+                    <a href="/project" class="flex items-center justify-start gap-3 px-3 py-2 rounded-lg hover:bg-gray-100 transition-colors nav-link" data-route="project">
                         <iconify-icon icon="tabler:folder" width="20" height="20"></iconify-icon>
                         <span>Project</span>
                     </a>
@@ -80,23 +87,23 @@
 
                 <!-- Additional menu items from template -->
                 <li class="space-y-0.5">
-                    <a class="collapse-toggle collapse-open:bg-base-content/10 flex items-center justify-between px-3 py-2 rounded-lg hover:bg-gray-100 transition-colors"
+                    <a class="collapse-toggle collapse-open:bg-base-content/10 flex items-center justify-start px-3 py-2 rounded-lg hover:bg-gray-100 transition-colors"
                        id="menu-app" data-collapse="#menu-app-collapse" onclick="toggleCollapse('menu-app-collapse')">
                         <div class="flex items-center gap-3">
                             <iconify-icon icon="tabler:apps" width="20" height="20"></iconify-icon>
                             <span>Apps</span>
                         </div>
-                        <iconify-icon icon="tabler:chevron-down" class="collapse-open:rotate-180 transition-all duration-300" width="16" height="16"></iconify-icon>
+                        <iconify-icon icon="tabler:chevron-down" class="collapse-open:rotate-180 transition-all duration-300 ml-auto" width="16" height="16"></iconify-icon>
                     </a>
                     <ul id="menu-app-collapse" class="collapse hidden w-auto space-y-0.5 overflow-hidden transition-[height] duration-300 pl-8" aria-labelledby="menu-app">
                         <li>
-                            <a href="#" class="flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-gray-100 transition-colors">
+                            <a href="#" class="flex items-center justify-start gap-3 px-3 py-2 rounded-lg hover:bg-gray-100 transition-colors">
                                 <iconify-icon icon="tabler:message" width="20" height="20"></iconify-icon>
                                 <span>Chat</span>
                             </a>
                         </li>
                         <li>
-                            <a href="#" class="flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-gray-100 transition-colors">
+                            <a href="#" class="flex items-center justify-start gap-3 px-3 py-2 rounded-lg hover:bg-gray-100 transition-colors">
                                 <iconify-icon icon="tabler:calendar" width="20" height="20"></iconify-icon>
                                 <span>Calendar</span>
                             </a>
@@ -105,39 +112,39 @@
                 </li>
 
                 <li>
-                    <a href="#" class="flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-gray-100 transition-colors">
+                    <a href="#" class="flex items-center justify-start gap-3 px-3 py-2 rounded-lg hover:bg-gray-100 transition-colors">
                         <iconify-icon icon="tabler:settings" width="20" height="20"></iconify-icon>
                         <span>Settings</span>
                     </a>
                 </li>
 
                 <!-- Account Separator -->
-                <div class="divider text-base-content/50 py-6 after:border-0">Account</div>
+                <div class="divider text-gray-500 py-4 after:border-0 text-xs font-medium uppercase tracking-wider">Account</div>
 
                 <li>
-                    <a href="#" class="flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-gray-100 transition-colors">
+                    <a href="#" class="flex items-center justify-start gap-3 px-3 py-2 rounded-lg hover:bg-gray-100 transition-colors">
                         <iconify-icon icon="tabler:login" width="20" height="20"></iconify-icon>
                         <span>Sign In</span>
                     </a>
                 </li>
                 <li>
-                    <a href="#" class="flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-gray-100 transition-colors">
+                    <a href="#" class="flex items-center justify-start gap-3 px-3 py-2 rounded-lg hover:bg-gray-100 transition-colors">
                         <iconify-icon icon="tabler:logout-2" width="20" height="20"></iconify-icon>
                         <span>Sign Out</span>
                     </a>
                 </li>
 
                 <!-- Miscellaneous Separator -->
-                <div class="divider text-base-content/50 py-6 after:border-0">Miscellaneous</div>
+                <div class="divider text-gray-500 py-4 after:border-0 text-xs font-medium uppercase tracking-wider">Miscellaneous</div>
 
                 <li>
-                    <a href="#" class="flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-gray-100 transition-colors">
+                    <a href="#" class="flex items-center justify-start gap-3 px-3 py-2 rounded-lg hover:bg-gray-100 transition-colors">
                         <iconify-icon icon="tabler:users-group" width="20" height="20"></iconify-icon>
                         <span>Support</span>
                     </a>
                 </li>
                 <li>
-                    <a href="#" class="flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-gray-100 transition-colors">
+                    <a href="#" class="flex items-center justify-start gap-3 px-3 py-2 rounded-lg hover:bg-gray-100 transition-colors">
                         <iconify-icon icon="tabler:files" width="20" height="20"></iconify-icon>
                         <span>Documentation</span>
                     </a>
@@ -147,7 +154,7 @@
     </aside>
 
     <!-- Main content area -->
-    <div class="ml-64 mt-16 min-h-screen bg-gray-50 p-6">
+    <div class="ml-56 mt-16 min-h-screen bg-gray-50 p-6 transition-all duration-300 ease-in-out">
       <div id="content-container" class="max-w-7xl mx-auto">
         <!-- Content will be dynamically loaded here -->
         <div id="dashboard-content">
@@ -249,9 +256,92 @@
     </div>
 
     <script>
-        // Simple dropdown functionality (optional - can be added later if needed)
+        // Sidebar folding functionality
         document.addEventListener('DOMContentLoaded', function() {
-            // Add dropdown functionality here if needed
+            const sidebar = document.getElementById('multilevel-with-separator');
+            const toggleButton = document.getElementById('sidebar-toggle');
+            const toggleIcon = document.getElementById('toggle-icon');
+            const navbar = document.querySelector('nav');
+            const mainContent = document.querySelector('.ml-56');
+            const menuItems = document.querySelectorAll('.menu li a span');
+            const dividers = document.querySelectorAll('.divider');
+            const collapseToggles = document.querySelectorAll('.collapse-toggle span');
+            const sidebarContent = sidebar.querySelector('div');
+            const sidebarLogo = sidebar.querySelector('a.text-xl');
+
+            let isFolded = false;
+
+            toggleButton.addEventListener('click', function() {
+                isFolded = !isFolded;
+
+                if (isFolded) {
+                    // Fold the sidebar
+                    sidebar.classList.remove('w-56');
+                    sidebar.classList.add('w-16');
+                    navbar.classList.remove('left-56');
+                    navbar.classList.add('left-16');
+                    mainContent.classList.remove('ml-56');
+                    mainContent.classList.add('ml-16');
+                    toggleIcon.setAttribute('icon', 'tabler:chevron-right');
+
+                    // Hide text labels, dividers, and logo
+                    menuItems.forEach(item => item.classList.add('hidden'));
+                    dividers.forEach(divider => divider.classList.add('hidden'));
+                    collapseToggles.forEach(toggle => toggle.classList.add('hidden'));
+                    sidebarLogo.classList.add('hidden');
+
+                    // Adjust padding for folded state
+                    sidebarContent.classList.add('px-1');
+                    sidebarContent.classList.remove('px-2');
+
+                    // Center icons in folded state
+                    const menuLinks = document.querySelectorAll('.menu li a');
+                    menuLinks.forEach(link => {
+                        link.classList.remove('justify-start');
+                        link.classList.add('justify-center');
+                        // Remove gap for folded state
+                        link.classList.remove('gap-3');
+                        link.classList.add('gap-0');
+                    });
+
+                    // Hide chevron icons in collapse toggles when folded
+                    const collapseChevrons = document.querySelectorAll('.collapse-toggle iconify-icon:last-child');
+                    collapseChevrons.forEach(chevron => chevron.classList.add('hidden'));
+                } else {
+                    // Unfold the sidebar
+                    sidebar.classList.remove('w-16');
+                    sidebar.classList.add('w-56');
+                    navbar.classList.remove('left-16');
+                    navbar.classList.add('left-56');
+                    mainContent.classList.remove('ml-16');
+                    mainContent.classList.add('ml-56');
+                    toggleIcon.setAttribute('icon', 'tabler:chevron-left');
+
+                    // Show text labels, dividers, and logo
+                    menuItems.forEach(item => item.classList.remove('hidden'));
+                    dividers.forEach(divider => divider.classList.remove('hidden'));
+                    collapseToggles.forEach(toggle => toggle.classList.remove('hidden'));
+                    sidebarLogo.classList.remove('hidden');
+
+                    // Restore padding
+                    sidebarContent.classList.remove('px-1');
+                    sidebarContent.classList.add('px-2');
+
+                    // Restore original layout
+                    const menuLinks = document.querySelectorAll('.menu li a');
+                    menuLinks.forEach(link => {
+                        link.classList.remove('justify-center');
+                        link.classList.add('justify-start');
+                        // Restore gap
+                        link.classList.remove('gap-0');
+                        link.classList.add('gap-3');
+                    });
+
+                    // Show chevron icons in collapse toggles when unfolded
+                    const collapseChevrons = document.querySelectorAll('.collapse-toggle iconify-icon:last-child');
+                    collapseChevrons.forEach(chevron => chevron.classList.remove('hidden'));
+                }
+            });
         });
 
         // Toggle collapse sections
@@ -315,12 +405,16 @@
                     }
                 });
 
+                // Update page title in navbar
+                const pageTitleElement = document.getElementById('page-title');
+                const pageTitle = pageId.charAt(0).toUpperCase() + pageId.slice(1);
+                pageTitleElement.textContent = pageTitle;
+
                 // Update browser URL without reloading page
                 const newUrl = window.location.origin + '/' + pageId;
                 window.history.pushState({ page: pageId }, '', newUrl);
 
-                // Update page title
-                const pageTitle = pageId.charAt(0).toUpperCase() + pageId.slice(1);
+                // Update document title
                 document.title = `expertise.ai - ${pageTitle}`;
             }
 
