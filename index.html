@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>expertise.ai - Dashboard</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- FlyonUI CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@flyonui/flyonui@latest/dist/flyonui.min.css">
+    <!-- Iconify for icons -->
+    <script src="https://code.iconify.design/iconify-icon/1.0.7/iconify-icon.min.js"></script>
+    <!-- Custom styles -->
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        .drawer {
+            transition: transform 0.3s ease-in-out;
+        }
+        .drawer-open {
+            transform: translateX(0);
+        }
+        .collapse {
+            transition: height 0.3s ease;
+        }
+        .collapse-open {
+            background-color: rgba(0, 0, 0, 0.1);
+        }
+    </style>
+</head>
+<body class="bg-gray-50 min-h-screen">
+
+    <!-- Navbar at the top (positioned to the right of sidebar) -->
+    <nav class="bg-white border-b border-gray-200 fixed top-0 left-64 right-0 z-50 px-6 py-4 h-16 flex items-center justify-between">
+      <div class="flex items-center">
+        <a class="text-xl font-bold text-gray-800 no-underline" href="#">
+          expertise.ai
+        </a>
+      </div>
+      <div class="flex items-center space-x-4">
+        <div class="hidden md:flex items-center bg-gray-100 rounded-full px-4 py-2">
+          <span class="icon-[tabler--search] text-gray-500 mr-2"></span>
+          <input type="search" class="bg-transparent border-none focus:outline-none text-sm" placeholder="Search..." />
+        </div>
+        <button class="md:hidden btn btn-sm btn-text">
+          <span class="icon-[tabler--search]"></span>
+        </button>
+        <div class="relative">
+          <button id="dropdown-scrollable" class="flex items-center focus:outline-none">
+            <div class="w-8 h-8 rounded-full overflow-hidden">
+              <img src="https://cdn.flyonui.com/fy-assets/avatar/avatar-1.png" alt="User avatar" class="w-full h-full object-cover" />
+            </div>
+          </button>
+        </div>
+      </div>
+    </nav>
+
+    <!-- Sidebar occupying left side -->
+    <aside id="multilevel-with-separator"
+           class="fixed left-0 top-0 h-screen w-64 bg-white border-r border-gray-200 shadow-lg">
+        <div class="h-full overflow-y-auto px-2 pt-4">
+            <ul class="menu space-y-0.5 p-0">
+                <!-- Main Menu Separator -->
+                <div class="divider text-base-content/50 py-2 after:border-0 font-semibold">Main Menu</div>
+
+                <!-- Dashboard -->
+                <li>
+                    <a href="/dashboard" class="flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-gray-100 transition-colors nav-link" data-route="dashboard">
+                        <iconify-icon icon="tabler:layout-dashboard" width="20" height="20"></iconify-icon>
+                        <span>Dashboard</span>
+                    </a>
+                </li>
+
+                <!-- Project -->
+                <li>
+                    <a href="/project" class="flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-gray-100 transition-colors nav-link" data-route="project">
+                        <iconify-icon icon="tabler:folder" width="20" height="20"></iconify-icon>
+                        <span>Project</span>
+                    </a>
+                </li>
+
+                <!-- Additional menu items from template -->
+                <li class="space-y-0.5">
+                    <a class="collapse-toggle collapse-open:bg-base-content/10 flex items-center justify-between px-3 py-2 rounded-lg hover:bg-gray-100 transition-colors"
+                       id="menu-app" data-collapse="#menu-app-collapse" onclick="toggleCollapse('menu-app-collapse')">
+                        <div class="flex items-center gap-3">
+                            <iconify-icon icon="tabler:apps" width="20" height="20"></iconify-icon>
+                            <span>Apps</span>
+                        </div>
+                        <iconify-icon icon="tabler:chevron-down" class="collapse-open:rotate-180 transition-all duration-300" width="16" height="16"></iconify-icon>
+                    </a>
+                    <ul id="menu-app-collapse" class="collapse hidden w-auto space-y-0.5 overflow-hidden transition-[height] duration-300 pl-8" aria-labelledby="menu-app">
+                        <li>
+                            <a href="#" class="flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-gray-100 transition-colors">
+                                <iconify-icon icon="tabler:message" width="20" height="20"></iconify-icon>
+                                <span>Chat</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#" class="flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-gray-100 transition-colors">
+                                <iconify-icon icon="tabler:calendar" width="20" height="20"></iconify-icon>
+                                <span>Calendar</span>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+
+                <li>
+                    <a href="#" class="flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-gray-100 transition-colors">
+                        <iconify-icon icon="tabler:settings" width="20" height="20"></iconify-icon>
+                        <span>Settings</span>
+                    </a>
+                </li>
+
+                <!-- Account Separator -->
+                <div class="divider text-base-content/50 py-6 after:border-0">Account</div>
+
+                <li>
+                    <a href="#" class="flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-gray-100 transition-colors">
+                        <iconify-icon icon="tabler:login" width="20" height="20"></iconify-icon>
+                        <span>Sign In</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#" class="flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-gray-100 transition-colors">
+                        <iconify-icon icon="tabler:logout-2" width="20" height="20"></iconify-icon>
+                        <span>Sign Out</span>
+                    </a>
+                </li>
+
+                <!-- Miscellaneous Separator -->
+                <div class="divider text-base-content/50 py-6 after:border-0">Miscellaneous</div>
+
+                <li>
+                    <a href="#" class="flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-gray-100 transition-colors">
+                        <iconify-icon icon="tabler:users-group" width="20" height="20"></iconify-icon>
+                        <span>Support</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#" class="flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-gray-100 transition-colors">
+                        <iconify-icon icon="tabler:files" width="20" height="20"></iconify-icon>
+                        <span>Documentation</span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </aside>
+
+    <!-- Main content area -->
+    <div class="ml-64 mt-16 min-h-screen bg-gray-50 p-6">
+      <div id="content-container" class="max-w-7xl mx-auto">
+        <!-- Content will be dynamically loaded here -->
+        <div id="dashboard-content">
+          <h1 class="text-2xl font-bold text-gray-800 mb-6">Dashboard</h1>
+          <p class="text-gray-600 mb-4">Welcome to your dashboard. The navbar is now at the top with "expertise.ai" and the sidebar remains visible on the left.</p>
+
+          <!-- Example dashboard content -->
+          <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-8">
+            <div class="bg-white rounded-lg shadow p-6">
+              <h3 class="text-lg font-semibold text-gray-800 mb-2">Total Users</h3>
+              <p class="text-3xl font-bold text-blue-600">1,234</p>
+              <p class="text-sm text-gray-500 mt-2">+12% from last month</p>
+            </div>
+            <div class="bg-white rounded-lg shadow p-6">
+              <h3 class="text-lg font-semibold text-gray-800 mb-2">Active Projects</h3>
+              <p class="text-3xl font-bold text-green-600">42</p>
+              <p class="text-sm text-gray-500 mt-2">+3 this week</p>
+            </div>
+            <div class="bg-white rounded-lg shadow p-6">
+              <h3 class="text-lg font-semibold text-gray-800 mb-2">Revenue</h3>
+              <p class="text-3xl font-bold text-purple-600">$24,580</p>
+              <p class="text-sm text-gray-500 mt-2">+8% from last quarter</p>
+            </div>
+          </div>
+
+          <div class="mt-8 bg-white rounded-lg shadow p-6">
+            <h3 class="text-lg font-semibold text-gray-800 mb-4">Recent Activity</h3>
+            <ul class="space-y-3">
+              <li class="flex items-center justify-between py-2 border-b">
+                <span class="text-gray-700">User registration completed</span>
+                <span class="text-sm text-gray-500">2 hours ago</span>
+              </li>
+              <li class="flex items-center justify-between py-2 border-b">
+                <span class="text-gray-700">New project created</span>
+                <span class="text-sm text-gray-500">5 hours ago</span>
+              </li>
+              <li class="flex items-center justify-between py-2 border-b">
+                <span class="text-gray-700">System update completed</span>
+                <span class="text-sm text-gray-500">1 day ago</span>
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <div id="project-content" class="hidden">
+          <h1 class="text-2xl font-bold text-gray-800 mb-6">Projects</h1>
+          <p class="text-gray-600 mb-4">Manage all your projects from this page. Create new projects, track progress, and collaborate with your team.</p>
+
+          <!-- Example project content -->
+          <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-8">
+            <div class="bg-white rounded-lg shadow p-6">
+              <div class="flex items-center justify-between mb-4">
+                <h3 class="text-lg font-semibold text-gray-800">Website Redesign</h3>
+                <span class="px-3 py-1 bg-blue-100 text-blue-800 text-xs font-medium rounded-full">In Progress</span>
+              </div>
+              <p class="text-gray-600 text-sm mb-4">Complete redesign of company website with modern UI/UX</p>
+              <div class="flex items-center justify-between">
+                <span class="text-sm text-gray-500">Due: Jan 30, 2026</span>
+                <span class="text-sm font-medium text-gray-700">75%</span>
+              </div>
+            </div>
+
+            <div class="bg-white rounded-lg shadow p-6">
+              <div class="flex items-center justify-between mb-4">
+                <h3 class="text-lg font-semibold text-gray-800">Mobile App</h3>
+                <span class="px-3 py-1 bg-green-100 text-green-800 text-xs font-medium rounded-full">Completed</span>
+              </div>
+              <p class="text-gray-600 text-sm mb-4">iOS and Android mobile application development</p>
+              <div class="flex items-center justify-between">
+                <span class="text-sm text-gray-500">Due: Dec 15, 2025</span>
+                <span class="text-sm font-medium text-gray-700">100%</span>
+              </div>
+            </div>
+
+            <div class="bg-white rounded-lg shadow p-6">
+              <div class="flex items-center justify-between mb-4">
+                <h3 class="text-lg font-semibold text-gray-800">API Integration</h3>
+                <span class="px-3 py-1 bg-yellow-100 text-yellow-800 text-xs font-medium rounded-full">Planning</span>
+              </div>
+              <p class="text-gray-600 text-sm mb-4">Third-party API integration for payment processing</p>
+              <div class="flex items-center justify-between">
+                <span class="text-sm text-gray-500">Due: Feb 15, 2026</span>
+                <span class="text-sm font-medium text-gray-700">25%</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="mt-8 bg-white rounded-lg shadow p-6">
+            <div class="flex items-center justify-between mb-4">
+              <h3 class="text-lg font-semibold text-gray-800">Create New Project</h3>
+              <button class="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors">
+                + Add Project
+              </button>
+            </div>
+            <p class="text-gray-600 text-sm">Start a new project by clicking the button above. You can add team members, set deadlines, and track progress.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script>
+        // Simple dropdown functionality (optional - can be added later if needed)
+        document.addEventListener('DOMContentLoaded', function() {
+            // Add dropdown functionality here if needed
+        });
+
+        // Toggle collapse sections
+        function toggleCollapse(collapseId) {
+            const collapse = document.getElementById(collapseId);
+            const isHidden = collapse.classList.contains('hidden');
+
+            // Toggle hidden class
+            collapse.classList.toggle('hidden');
+
+            // Toggle height for smooth animation
+            if (isHidden) {
+                collapse.style.height = collapse.scrollHeight + 'px';
+                setTimeout(() => {
+                    collapse.style.height = 'auto';
+                }, 300);
+            } else {
+                collapse.style.height = collapse.scrollHeight + 'px';
+                setTimeout(() => {
+                    collapse.style.height = '0px';
+                }, 10);
+            }
+
+            // Toggle rotate icon
+            const toggleButton = document.querySelector(`[data-collapse="#${collapseId}"]`);
+            const icon = toggleButton.querySelector('iconify-icon:last-child');
+            icon.classList.toggle('rotate-180');
+        }
+
+        // Initialize collapse heights
+        document.addEventListener('DOMContentLoaded', function() {
+            const collapses = document.querySelectorAll('.collapse');
+            collapses.forEach(collapse => {
+                if (!collapse.classList.contains('hidden')) {
+                    collapse.style.height = 'auto';
+                } else {
+                    collapse.style.height = '0px';
+                }
+            });
+        });
+
+        // Page Routing System
+        document.addEventListener('DOMContentLoaded', function() {
+            // Get all navigation links
+            const navLinks = document.querySelectorAll('.nav-link');
+
+            // Function to show a specific page
+            function showPage(pageId) {
+                // Hide all content sections
+                document.getElementById('dashboard-content').classList.add('hidden');
+                document.getElementById('project-content').classList.add('hidden');
+
+                // Show the requested page
+                document.getElementById(`${pageId}-content`).classList.remove('hidden');
+
+                // Update active state in sidebar
+                navLinks.forEach(link => {
+                    link.classList.remove('active');
+                    if (link.getAttribute('data-route') === pageId) {
+                        link.classList.add('active');
+                    }
+                });
+
+                // Update browser URL without reloading page
+                const newUrl = window.location.origin + '/' + pageId;
+                window.history.pushState({ page: pageId }, '', newUrl);
+
+                // Update page title
+                const pageTitle = pageId.charAt(0).toUpperCase() + pageId.slice(1);
+                document.title = `expertise.ai - ${pageTitle}`;
+            }
+
+            // Function to handle navigation clicks
+            function handleNavigation(e) {
+                e.preventDefault();
+                const route = this.getAttribute('data-route');
+                showPage(route);
+            }
+
+            // Add click event listeners to all navigation links
+            navLinks.forEach(link => {
+                link.addEventListener('click', handleNavigation);
+            });
+
+            // Handle browser back/forward buttons
+            window.addEventListener('popstate', function(event) {
+                if (event.state && event.state.page) {
+                    showPage(event.state.page);
+                } else {
+                    // Default to dashboard if no state
+                    showPage('dashboard');
+                }
+            });
+
+            // Determine initial page based on URL
+            function getInitialPage() {
+                const path = window.location.pathname;
+                if (path.includes('/project')) {
+                    return 'project';
+                }
+                // Default to dashboard
+                return 'dashboard';
+            }
+
+            // Initialize the page
+            const initialPage = getInitialPage();
+            showPage(initialPage);
+        });
+    </script>
+</body>
+</html>
