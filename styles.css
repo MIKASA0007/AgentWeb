@@ -62,7 +62,7 @@ aside {
 }
 
 /* Empty space styling */
-.ml-64 {
+.ml-56 {
     min-height: 100vh;
     background: linear-gradient(135deg, #f9fafb 0%, #f3f4f6 100%);
 }
@@ -77,8 +77,16 @@ aside {
         border-bottom: 1px solid #e5e7eb;
     }
 
-    .ml-64 {
+    aside.w-16, aside.w-56 {
+        width: 100% !important;
+    }
+
+    .ml-56, .ml-16 {
         margin-left: 0;
+    }
+
+    nav.left-56, nav.left-16 {
+        left: 0 !important;
     }
 }
 
@@ -88,7 +96,7 @@ aside {
         display: none !important;
     }
 
-    .ml-64 {
+    .ml-56 {
         margin-left: 0 !important;
         width: 100% !important;
     }
@@ -101,6 +109,41 @@ aside {
 
 .menu li a:hover {
     transform: translateX(4px);
+}
+
+/* Folded sidebar styles */
+aside.w-16 .menu li a {
+    justify-content: center;
+    padding-left: 0.25rem;
+    padding-right: 0.25rem;
+}
+
+aside.w-16 .menu li a:hover {
+    transform: scale(1.05);
+}
+
+aside.w-16 .divider {
+    text-align: center;
+    font-size: 0.75rem;
+}
+
+/* Logo container in folded state */
+aside.w-16 .flex.items-center.justify-between {
+    justify-content: center;
+}
+
+aside.w-16 .flex.items-center.justify-between a {
+    display: none;
+}
+
+/* Fold button styling */
+#sidebar-toggle {
+    transition: all 0.2s ease;
+}
+
+#sidebar-toggle:hover {
+    background-color: #f3f4f6;
+    transform: scale(1.1);
 }
 
 /* Section spacing */
